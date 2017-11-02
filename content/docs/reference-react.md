@@ -103,7 +103,7 @@ React.cloneElement(
 )
 ```
 
-Clone and return a new React element using `element` as the starting point. The resulting element will have the original element's props with the new props merged in shallowly. New children will replace existing children. `key` and `ref` from the original element will be preserved.
+Clone and return a new React element using `element` as the starting point. The resulting element will have the original element's props with the new props merged in shallowly. New children will replace existing children. `key` from the original element will be preserved, and `ref` will also be preserved unless you pass a `ref` in `props` (which will overwrite the `ref` in the cloned element).
 
 `React.cloneElement()` is almost equivalent to:
 
@@ -111,7 +111,7 @@ Clone and return a new React element using `element` as the starting point. The 
 <element.type {...element.props} {...props}>{children}</element.type>
 ```
 
-However, it also preserves `ref`s. This means that if you get a child with a `ref` on it, you won't accidentally steal it from your ancestor. You will get the same `ref` attached to your new element.
+If you don't pass `...children` and `props` contains `children`, `props.children` will become the `children` of the cloned element.
 
 This API was introduced as a replacement of the deprecated `React.addons.cloneWithProps()`.
 
